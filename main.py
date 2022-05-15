@@ -1,5 +1,8 @@
 from tkinter import *
+from PIL import ImageTk, Image
 from tkinter import font as tkfont
+from firstpage import PageOne
+from secondpage import PageTwo
 
 import tkinter as tk
 
@@ -39,7 +42,7 @@ class StartPage(tk.Frame):
 
         label = tk.Label(self, text="EZQuik", font=("Karma", 25, "bold"), foreground="#F25757", background="#083D77",
                          bd=10, relief=RAISED)
-        label.pack(side="top", fill="x", pady=10)
+        label.pack(side="top", fill='x', pady=10)
         label1 = tk.Label(self, text="Satisfy Your Cravings", font=("Karma", 16),
                           foreground="#000000")
         label1.pack(padx=50, pady=15)
@@ -49,19 +52,17 @@ class StartPage(tk.Frame):
 
         password = tk.StringVar()
         password_entry = tk.Entry(self, textvariable=password, font=("Karma", 12), width=20, relief=RAISED)
-        password_entry.focus_set()
+        password_entry.focus_set()  # Enables blinker in entry box
         password_entry.pack(ipady=7)
 
         def handle(_):
-            password_entry.configure(foreground="#000000", show='*')
+            password_entry.configure(foreground="#000000", show='*')  # Encrypts password input
 
         password_entry.bind("<FocusIn>", handle)
 
         def password_check():  # Enter Password prior to usage
             if password.get() == "123":
-                password.set('')
-                incorrect_password["text"] = ''
-                controller.show_frame("StartPage")
+                controller.show_frame("PageOne")
             else:
                 incorrect_password["text"] = "Incorrect Password"
 
@@ -69,12 +70,9 @@ class StartPage(tk.Frame):
                                  command=password_check)
         enter_button.pack(pady=10)
 
-        incorrect_password = tk.Label(self, text='', font=("Karma", 12), foreground="#ffffff", background="#083D77",
-                                      anchor='n', bd=15, relief=RAISED)
+        incorrect_password = tk.Label(self, text="", font=("Karma", 12), foreground="#F25757",
+                                      background="#083D77", padx=50, bd=15, relief=RAISED)
         incorrect_password.pack(fill="both", expand=True)
-
-        button_frame = tk.Frame(self, borderwidth=2)
-        button_frame.pack(fill='x', side="bottom")
 
         def close():  # Quit button
             self.destroy()
@@ -82,28 +80,13 @@ class StartPage(tk.Frame):
 
         Button(self, text="Quit", font=("Karma", 12, "bold"), foreground="#F25757", command=close).pack(pady=30)
 
+        bottom_frame = tk.Frame(self, relief=RAISED, borderwidth=2)
+        bottom_frame.pack(fill='x', side="bottom")
 
-class PageOne(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-        label = tk.Label(self, text="Snacks", font=('Karma', 25, 'bold'), foreground="#F25757",
-                         background="#083D77", bd=10, relief=RAISED)
-
-        label.pack(side="top", fill="x", pady=10)
-        button = tk.Button(self, text="Return", command=lambda: controller.show_frame("StartPage"))
-        button.pack()
-
-
-class PageTwo(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-        label = tk.Label(self, text="Drinks", font=('Karma', 25, 'bold'), foreground="#F25757",
-                         background="#083D77", bd=10, relief=RAISED)
-        label.pack(side="top", fill="x", pady=10)
-        button = tk.Button(self, text="Return", command=lambda: controller.show_frame("StartPage"))
-        button.pack()
+        # visa = tk.PhotoImage(file="visa.png")
+        # visa_label = tk.Label(bottom_frame, image=visa)
+        # visa_label.pack(side=LEFT)
+        # visa_label.image = visa
 
 
 if __name__ == "__main__":
