@@ -3,5 +3,5 @@ A simulation to purchase one or several items to satisfy one's hunger and thirst
 
 # What I Learned
 - Python controller (directing flow of data) 
-- Tkinter packages: Pillow, TkFont
-- UI components: Labels, Buttons, Frames, Canvases, etc) 
+- Tkinter components: Pillow, TkFont
+- UI Widgets: Labels, Buttons, Frames, Canvases, etc) 
